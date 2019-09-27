@@ -43,7 +43,7 @@
 
                     <ul class="navbar-nav justify-content-center">
                         {{ Form::open(['route' => 'frontend.search', 'method' => 'GET' ,'class' => 'form-inline']) }}
-                        {{ Form::input('search', 'Search', null, ['class' => 'form-control mr-sm-2', 'placeholder' => 'Search']) }}
+                        {{ Form::input('search', 'Search', request()->get('Search'), ['class' => 'form-control mr-sm-2', 'placeholder' => 'Search']) }}
                         {{ Form::submit('Search', ['class' => 'btn btn-outline-success my-2 my-sm-0']) }}
                         {{Form::close()}}
                     </ul>
