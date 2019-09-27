@@ -10,6 +10,7 @@ use App\Manufacturer;
 use App\Tag;
 use App\Tarif;
 use Illuminate\Http\Request;
+use Storage;
 use Yajra\DataTables\DataTables;
 use function foo\func;
 
@@ -198,6 +199,15 @@ class ArticleController extends Controller
             $file->storeAs(null, $article->articleImage, 'articleImages');
         };
 
+    }
 
+    public function imageDelete(Article $article) {
+
+        Storage::disk('articleImages')->delete($article->articleImage);
+
+        $article->articleImage = null;
+        $article->save();
+
+        return redirect()->route('article.edit', $article->id);
     }
 }
