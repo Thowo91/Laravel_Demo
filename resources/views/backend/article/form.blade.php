@@ -32,4 +32,8 @@
     {{ Form::select('status', $status, null, ['class' => 'form-control']) }}
     <div>{{ $errors->first('status') }}</div>
 </div>
+<div class="form-group">
+    {{ Form::label('articleImage', 'Artikelbild') }}
+    {{ Form::file('articleImage', ['class' => 'form-control-file']) }}
+</div>
 {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}

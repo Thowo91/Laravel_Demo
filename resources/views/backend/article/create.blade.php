@@ -7,7 +7,7 @@
 
     <div class="row">
         <div class="col-12">
-            {{ Form::open(['route' => 'article.store']) }}
+            {{ Form::open(['route' => 'article.store', 'files' => 'true']) }}
             @include('backend.article.form')
             {{ Form::close() }}
         </div>
