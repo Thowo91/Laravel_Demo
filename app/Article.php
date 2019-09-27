@@ -38,7 +38,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Article extends Model
 {
-    protected $fillable = ['categorie_id', 'manufacturer_id', 'name', 'price', 'description', 'status'];
+    protected $fillable = ['categorie_id', 'manufacturer_id', 'name', 'price', 'description', 'status', 'articleImage'];
 
     public function categorie() {
         return $this->belongsTo('App\Categorie');
