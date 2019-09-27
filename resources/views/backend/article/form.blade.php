@@ -35,5 +35,6 @@
 <div class="form-group">
     {{ Form::label('articleImage', 'Artikelbild') }}
     {{ Form::file('articleImage', ['class' => 'form-control-file']) }}
+    <div>{{ $errors->first('articleImage') }}</div>
 </div>
 {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}

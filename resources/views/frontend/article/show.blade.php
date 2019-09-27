@@ -2,20 +2,28 @@
 
 @section('content')
 
-    <h2>Artikel {{ $article->name }}</h2>
+    <div class="row">
+        <div class="col-6">
+            <h2>Artikel {{ $article->name }}</h2>
 
-    <p>Id: {{ $article->id }}</p>
-    <p>Name: {{ $article->name }}</p>
-    <p>Kategorie: {{ $article->categorie->name }}</p>
-    <p>Hersteller: {{ $article->manufacturer->name }}</p>
-    <p>Tags:
-        @foreach($article->tags as $tag)
-            {!! $tag->tagBadge !!}
-        @endforeach
-    </p>
-    <p>Preis: {{ $article->price }}</p>
-    <p>Beschreibung: {{ $article->description }}</p>
-    <p>Status: {!! $article->statusBadge !!}</p>
+            <p>Id: {{ $article->id }}</p>
+            <p>Name: {{ $article->name }}</p>
+            <p>Kategorie: {{ $article->categorie->name }}</p>
+            <p>Hersteller: {{ $article->manufacturer->name }}</p>
+            <p>Tags:
+                @foreach($article->tags as $tag)
+                    {!! $tag->tagBadge !!}
+                @endforeach
+            </p>
+            <p>Preis: {{ $article->price }}</p>
+            <p>Beschreibung: {{ $article->description }}</p>
+            <p>Status: {!! $article->statusBadge !!}</p>
+        </div>
+        <div class="col-6">
+            <img src="{{ Storage::disk('articleImages')->url($article->articleImage) }}">
+        </div>
+    </div>
+
 
     <h2>Mögliche Tarife</h2>
     <div class="row">

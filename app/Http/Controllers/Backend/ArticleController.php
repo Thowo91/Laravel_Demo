@@ -87,6 +87,8 @@ class ArticleController extends Controller
         $article = Article::create($request->all());
         $article->tags()->sync($request->tags_id);
 
+        $this->imageUpload($request, $article);
+
         return redirect()->route('article.index');
     }
 
@@ -139,10 +141,11 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, Article $article)
     {
-//        dd($request->all());
 
         $article->update($request->all());
         $article->tags()->sync($request->tags_id);
+
+        $this->imageUpload($request, $article);
 
         return redirect()->route('article.index');
     }
@@ -177,5 +180,24 @@ class ArticleController extends Controller
         }
 
         return redirect()->route('article.index');
+    }
+
+    public function imageUpload(Request $request, Article $article) {
+
+        if ($request->hasFile('articleImage')) {
+
+            $request->validate([
+                'articleImage' => 'image',
+            ]);
+
+            $file = $request->file('articleImage');
+
+            $article->articleImage = $article->id . '.' . $file->getClientOriginalExtension();
+            $article->save();
+
+            $file->storeAs(null, $article->articleImage, 'articleImages');
+        };
+
+
     }
 }
