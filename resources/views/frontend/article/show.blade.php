@@ -20,7 +20,7 @@
             <p>Status: {!! $article->statusBadge !!}</p>
         </div>
         <div class="col-6">
-            <img src="{{ Storage::disk('articleImages')->url($article->articleImage) }}">
+            <img src="{{ Storage::disk('articleImages')->url($article->articleImage) }}?{{ time() }}" style="height: 350px;">
         </div>
     </div>
 
