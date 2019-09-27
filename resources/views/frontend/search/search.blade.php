@@ -10,24 +10,10 @@
                 <div class="card mb-2 text-white bg-primary">
                     <div class="card-body">
                         <h5 class="card-title">{{ $item->id }} | {{ $item->name }}</h5>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-        @foreach($manufacturers as $item)
-            <div class="col-lg-6 col-xl-4">
-                <div class="card mb-2 text-white bg-secondary">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $item->id }} | {{ $item->name }}</h5>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-        @foreach($providers as $item)
-            <div class="col-lg-6 col-xl-4">
-                <div class="card mb-2 text-white bg-success">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $item->id }} | {{ $item->name }}</h5>
+                        <div class="card-text">
+                            <p>Kategorie: {{ $item->categorie->name }}</p>
+                            <p>Hersteller: {{ $item->manufacturer->name }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -37,6 +23,9 @@
                 <div class="card mb-2 text-white bg-info">
                     <div class="card-body">
                         <h5 class="card-title">{{ $item->id }} | {{ $item->name }}</h5>
+                        <div class="card-text">
+                            <p>Provider: {{ $item->provider->name }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
