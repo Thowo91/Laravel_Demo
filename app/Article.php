@@ -38,7 +38,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Article extends Model
 {
-    protected $fillable = ['categorie_id', 'manufacturer_id', 'name', 'price', 'description', 'status', 'articleImage'];
+    protected $fillable = ['categorie_id', 'manufacturer_id', 'name', 'price', 'description', 'status'];
 
     public function categorie() {
         return $this->belongsTo('App\Categorie');
@@ -58,6 +58,25 @@ class Article extends Model
 
     public function images() {
         return $this->morphMany('App\Image', 'imageable');
+    }
+
+    /**
+     * @param $count
+     * @param $dimension
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function imageCountDimension($count, $dimension) {
+        $img = $this->morphMany('App\Image', 'imageable')
+            ->where([
+                ['count', '=', $count],
+                ['dimension', '=', $dimension],
+            ])->get();
+
+        $url = '';
+        foreach($img as $item) {
+            $url = $item->url;
+        }
+        return $url;
     }
 
     public function getStatusBadgeAttribute() {

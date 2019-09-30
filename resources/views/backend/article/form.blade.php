@@ -36,24 +36,59 @@
             {{ Form::select('status', $status, null, ['class' => 'form-control']) }}
             <div>{{ $errors->first('status') }}</div>
         </div>
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    {{ Form::label('articleImage', 'Artikelbild') }}
-                    {{ Form::file('articleImage', ['class' => 'form-control-file']) }}
-                    <div>{{ $errors->first('articleImage') }}</div>
-                </div>
-                @if($action == 'edit')
-                    <a href="{{ route('article.image.delete', $article->id) }}" class="btn btn-danger">Delete Image</a>
-                @endif
-            </div>
-            <div class="col-6">
-                @if($action == 'edit')
-                    <img src="{{ Storage::disk('articleImages')->url($article->articleImage) }}?{{ time() }}" style="height: 200px;">
-                @endif
-            </div>
-        </div>
 
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <div class="form-group">
+            {{ Form::label('articleImage', 'Artikelbild 1') }}
+            {{ Form::file('articleImage[1]', ['class' => 'form-control-file']) }}
+            <div>{{ $errors->first('articleImage') }}</div>
+        </div>
+        @if($action == 'edit')
+            <a href="{{ route('article.image.delete', [$article->id, 1]) }}" class="btn btn-danger">Delete Image</a>
+        @endif
+    </div>
+    <div class="col-6">
+        @if($action == 'edit')
+            <img src="{{ Storage::disk('articleImages')->url($article->imageCountDimension(1, 'small')) }}?{{ time() }}">
+        @endif
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <div class="form-group">
+            {{ Form::label('articleImage', 'Artikelbild 2') }}
+            {{ Form::file('articleImage[2]', ['class' => 'form-control-file']) }}
+            <div>{{ $errors->first('articleImage') }}</div>
+        </div>
+        @if($action == 'edit')
+            <a href="{{ route('article.image.delete', [$article->id, 2]) }}" class="btn btn-danger">Delete Image</a>
+        @endif
+    </div>
+    <div class="col-6">
+        @if($action == 'edit')
+            <img src="{{ Storage::disk('articleImages')->url($article->imageCountDimension(2, 'small')) }}?{{ time() }}">
+        @endif
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <div class="form-group">
+            {{ Form::label('articleImage', 'Artikelbild 3') }}
+            {{ Form::file('articleImage[3]', ['class' => 'form-control-file']) }}
+            <div>{{ $errors->first('articleImage') }}</div>
+        </div>
+        @if($action == 'edit')
+            <a href="{{ route('article.image.delete', [$article->id, 3]) }}" class="btn btn-danger">Delete Image</a>
+        @endif
+    </div>
+    <div class="col-6">
+        @if($action == 'edit')
+            <img src="{{ Storage::disk('articleImages')->url($article->imageCountDimension(3, 'small')) }}?{{ time() }}">
+        @endif
     </div>
 </div>
 

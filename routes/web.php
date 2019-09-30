@@ -61,7 +61,7 @@ Route::namespace('Backend')
         Route::get('/categorieIndexDatatables', 'CategorieController@indexDatatables')->name('categorie.data');
 
         Route::get('/article/{article}/delete', 'ArticleController@destroy')->name('article.delete');
-        Route::get('/article/{article}/imageDelete', 'ArticleController@imageDelete')->name('article.image.delete');
+        Route::get('/article/{article}/{count}/imageDelete', 'ArticleController@imageDelete')->name('article.image.delete');
         Route::patch('/article/saveTarif/{article}', 'ArticleController@saveTarif')->name('article.tarif');
         Route::resource('article', 'ArticleController');
         Route::get('/articleIndexDatatables', 'ArticleController@indexDatatables')->name('article.data');

@@ -20,7 +20,18 @@
             <p>Status: {!! $article->statusBadge !!}</p>
         </div>
         <div class="col-6">
-            <img src="{{ Storage::disk('articleImages')->url($article->articleImage) }}?{{ time() }}" style="height: 350px;">
+            <table>
+                <tr>
+                    <th>Artikelbild 1</th>
+                    <th>Artikelbild 2</th>
+                    <th>Artikelbild 3</th>
+                </tr>
+                <tr>
+                    <td><img src="{{ Storage::disk('articleImages')->url($article->imageCountDimension(1, 'medium')) }}?{{ time() }}"></td>
+                    <td><img src="{{ Storage::disk('articleImages')->url($article->imageCountDimension(2, 'medium')) }}?{{ time() }}"></td>
+                    <td><img src="{{ Storage::disk('articleImages')->url($article->imageCountDimension(3, 'medium')) }}?{{ time() }}"></td>
+                </tr>
+            </table>
         </div>
     </div>
 

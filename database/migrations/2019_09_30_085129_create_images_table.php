@@ -14,8 +14,9 @@ class CreateImagesTable extends Migration
     public function up()
     {
         Schema::create('images', function (Blueprint $table) {
+            $table->integerIncrements('id');
             $table->morphs('imageable');
-            $table->string('count');
+            $table->integer('count');
             $table->string('dimension');
             $table->string('url');
         });

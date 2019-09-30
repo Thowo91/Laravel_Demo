@@ -188,36 +188,36 @@ class ArticleController extends Controller
         if ($request->hasFile('articleImage')) {
 
             $request->validate([
-                'articleImage' => 'image',
+                'articleImage[]' => 'image',
             ]);
 
-            $file = $request->file('articleImage');
+            foreach ($request->file('articleImage') as $key => $file) {
 
-            # COUNT 1
+                $original = $key . '_' . $article->id . '.' . $file->getClientOriginalExtension();
 
-            $original = '1_' . $article->id . '.' . $file->getClientOriginalExtension();
+                $file->storeAs(null, $original, 'articleImages');
+                $article->images()->updateOrCreate(['dimension' => 'original', 'count' => $key, 'url' => $original]);
 
-            $file->storeAs(null, $original, 'articleImages');
-            $article->images()->updateOrCreate(['dimension' => 'original', 'count' => 1, 'url' => $original]);
+                $dimensons = ['big', 'medium', 'small'];
 
-            $dimensons = ['big', 'medium', 'small'];
+                foreach($dimensons as $dimenson) {
 
-            foreach($dimensons as $dimenson) {
-
-                $article->images()->updateOrCreate(['dimension' => $dimenson, 'count' => 1, 'url' => $dimenson . '_' . $original]);
-                $this->processImageResize($original, $dimenson, null, 'articleImages');
+                    $article->images()->updateOrCreate(['dimension' => $dimenson, 'count' => $key, 'url' => $dimenson . '_' . $original]);
+                    $this->processImageResize($original, $dimenson, null, 'articleImages');
+                }
             }
-
         };
-
     }
 
-    public function imageDelete(Article $article) {
+    public function imageDelete(Article $article, $count) {
 
-        Storage::disk('articleImages')->delete($article->articleImage);
+        $images = $article->images()->where('count', $count)->get();
 
-        $article->articleImage = null;
-        $article->save();
+        foreach ($images as $image) {
+            Storage::disk('articleImages')->delete($image->url);
+            $image->delete();
+        }
+
 
         return redirect()->route('article.edit', $article->id);
     }
