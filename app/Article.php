@@ -56,6 +56,10 @@ class Article extends Model
         return $this->belongsToMany('App\Tarif')->withPivot('status', 'price');
     }
 
+    public function images() {
+        return $this->morphMany('App\Image', 'imageable');
+    }
+
     public function getStatusBadgeAttribute() {
 
         $status = [

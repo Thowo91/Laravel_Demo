@@ -193,12 +193,21 @@ class ArticleController extends Controller
 
             $file = $request->file('articleImage');
 
-            $article->articleImage = $article->id . '.' . $file->getClientOriginalExtension();
-            $article->save();
+            # COUNT 1
 
-            $file->storeAs(null, $article->articleImage, 'articleImages');
+            $original = '1_' . $article->id . '.' . $file->getClientOriginalExtension();
 
-            $this->processImage($article->articleImage, null, 'articleImages');
+            $file->storeAs(null, $original, 'articleImages');
+            $article->images()->updateOrCreate(['dimension' => 'original', 'count' => 1, 'url' => $original]);
+
+            $dimensons = ['big', 'medium', 'small'];
+
+            foreach($dimensons as $dimenson) {
+
+                $article->images()->updateOrCreate(['dimension' => $dimenson, 'count' => 1, 'url' => $dimenson . '_' . $original]);
+                $this->processImageResize($original, $dimenson, null, 'articleImages');
+            }
+
         };
 
     }
@@ -213,15 +222,33 @@ class ArticleController extends Controller
         return redirect()->route('article.edit', $article->id);
     }
 
-    public function processImage(string $name, string $path = null, string $disk = 'local') {
+    public function processImageResize(string $original, string $dimension, string $path = null, string $disk = 'local') {
 
-        $img = Image::make(Storage::disk($disk)->path($path . $name));
+        $img = Image::make(Storage::disk($disk)->path($path . $original));
 
-        $imgSmall = $img->resize(200, 200, function ($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
-        })->encode();
+        switch ($dimension) {
+            case 'big':
+                $resize = $img->resize(500, 500, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->encode();
+                break;
 
-        Storage::disk($disk)->put($path . '200_' . $name, $imgSmall);
+            case 'medium':
+                $resize = $img->resize(200, 200, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->encode();
+                break;
+
+            case 'small':
+                $resize = $img->resize(100, 100, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->encode();
+                break;
+        }
+
+        Storage::disk($disk)->put($path . $dimension . '_' . $original, $resize);
     }
 }
