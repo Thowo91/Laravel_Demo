@@ -10,9 +10,9 @@ use App\Manufacturer;
 use App\Tag;
 use App\Tarif;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use Storage;
 use Yajra\DataTables\DataTables;
-use function foo\func;
 
 class ArticleController extends Controller
 {
@@ -197,6 +197,8 @@ class ArticleController extends Controller
             $article->save();
 
             $file->storeAs(null, $article->articleImage, 'articleImages');
+
+            $this->processImage($article->articleImage, null, 'articleImages');
         };
 
     }
@@ -209,5 +211,17 @@ class ArticleController extends Controller
         $article->save();
 
         return redirect()->route('article.edit', $article->id);
+    }
+
+    public function processImage(string $name, string $path = null, string $disk = 'local') {
+
+        $img = Image::make(Storage::disk($disk)->path($path . $name));
+
+        $imgSmall = $img->resize(200, 200, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        })->encode();
+
+        Storage::disk($disk)->put($path . '200_' . $name, $imgSmall);
     }
 }
