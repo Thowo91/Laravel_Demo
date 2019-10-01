@@ -273,11 +273,7 @@ class ArticleController extends Controller
         $csvExporter->beforeEach(function ($article) {
             $article->tarifCount = $article->tarifs()->active()->wherePivot('status', '=', 1)->count();
 
-            $tags = '';
-            foreach ($article->tags()->get() as $tag) {
-                $tags .= $tag->name . ';';
-            }
-            $article->tags = $tags;
+            $article->tags = implode(';',$article->tags()->pluck('name')->toArray());
         });
 
         $csvExporter->build($article, $fields)->download('article_export.csv');
