@@ -4,7 +4,7 @@
 
 Danke das Sie sich für diesen Artikel interessieren
 
-<img src="{{ Storage::disk('articleImages')->url($article->imageCountDimension(1, 'medium')) }}?{{ time() }}">
+<img src="{{ Storage::disk('articleImages')->url($article->imageCountDimension(1, 'medium')) }} }}">
 
 @component('mail::table')
     |             |                                     |
