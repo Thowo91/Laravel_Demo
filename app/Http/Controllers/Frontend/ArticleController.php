@@ -11,8 +11,7 @@ use App\Tag;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Helpers\SearchHelper as SearchHelper;
-use Mail;
-use function foo\func;
+use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
 {
@@ -79,6 +78,13 @@ class ArticleController extends Controller
         return view('frontend.article.show', compact('article', 'tarifs'));
     }
 
+    /**
+     * Article Information Mail
+     *
+     * @param Request $request
+     * @param Article $article
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function articleInformationMail(Request $request, Article $article) {
 
         $validateData = $request->validate([
