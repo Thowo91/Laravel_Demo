@@ -48,7 +48,7 @@
             <div>{{ $errors->first('articleImage') }}</div>
         </div>
         @if($action == 'edit')
-            <a href="{{ route('article.image.delete', [$article->id, 1]) }}" class="btn btn-danger">Delete Image</a>
+            <a href="{{ route('article.image.delete', [$article->id, 1]) }}" class="btn btn-sm btn-danger">Delete Image</a>
         @endif
     </div>
     <div class="col-6">
@@ -65,7 +65,7 @@
             <div>{{ $errors->first('articleImage') }}</div>
         </div>
         @if($action == 'edit')
-            <a href="{{ route('article.image.delete', [$article->id, 2]) }}" class="btn btn-danger">Delete Image</a>
+            <a href="{{ route('article.image.delete', [$article->id, 2]) }}" class="btn btn-sm btn-danger">Delete Image</a>
         @endif
     </div>
     <div class="col-6">
@@ -82,7 +82,7 @@
             <div>{{ $errors->first('articleImage') }}</div>
         </div>
         @if($action == 'edit')
-            <a href="{{ route('article.image.delete', [$article->id, 3]) }}" class="btn btn-danger">Delete Image</a>
+            <a href="{{ route('article.image.delete', [$article->id, 3]) }}" class="btn btn-sm btn-danger">Delete Image</a>
         @endif
     </div>
     <div class="col-6">
@@ -93,4 +93,4 @@
 </div>
 
 
-{{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
+{{ Form::submit('Save', ['class' => 'btn btn-primary my-3']) }}
