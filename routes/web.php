@@ -32,6 +32,7 @@ Route::namespace('Frontend')
         Route::get('/categorie/{categorie}', 'CategorieController@show')->name('categorie.show');
 
         Route::get('/article', 'ArticleController@index')->name('article.index');
+        Route::post('/article/informationMail/{article}', 'ArticleController@articleInformationMail')->name('article.informationMail');
         Route::get('/article/{article}', 'ArticleController@show')->name('article.show');
 
         Route::get('/search', 'SearchController@search')->name('search');

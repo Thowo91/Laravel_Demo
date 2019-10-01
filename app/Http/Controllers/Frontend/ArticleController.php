@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Frontend;
 use App\Article;
 use App\Categorie;
 use App\Http\Controllers\Controller;
+use App\Mail\ArticleInformation;
 use App\Manufacturer;
 use App\Tag;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Helpers\SearchHelper as SearchHelper;
+use Mail;
 use function foo\func;
 
 class ArticleController extends Controller
@@ -75,5 +77,16 @@ class ArticleController extends Controller
         $tarifs = $article->tarifs()->active()->wherePivot('status', '=', 1)->get();
 
         return view('frontend.article.show', compact('article', 'tarifs'));
+    }
+
+    public function articleInformationMail(Request $request, Article $article) {
+
+        $validateData = $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        Mail::to($request->email)->send(new ArticleInformation($article));
+
+        return redirect()->route('frontend.article.show', $article->id);
     }
 }

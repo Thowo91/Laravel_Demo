@@ -17,7 +17,7 @@
             </p>
             <p>Preis: {{ $article->price }}</p>
             <p>Beschreibung: {{ $article->description }}</p>
-            <p>Status: {!! $article->statusBadge !!}</p>
+            Status: {!! $article->statusBadge !!}
         </div>
         <div class="col-6">
             <table>
@@ -35,6 +35,15 @@
         </div>
     </div>
 
+    <h3 class="mt-3">Arikelinformationen per Mail</h3>
+
+    {{ Form::open(['route' => ['frontend.article.informationMail', $article->id]]) }}
+    <div class="form-group">
+        {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Enter Email']) }}
+        <div>{{ $errors->first('email') }}</div>
+    </div>
+    {{ Form::submit('Absenden', ['class' => 'btn btn-sm btn-primary mb-3']) }}
+    {{ Form::close() }}
 
     <h2>Mögliche Tarife</h2>
     <div class="row">
