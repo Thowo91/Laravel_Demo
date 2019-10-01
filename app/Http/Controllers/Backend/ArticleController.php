@@ -11,6 +11,7 @@ use App\Tag;
 use App\Tarif;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Laracsv\Export;
 use Storage;
 use Yajra\DataTables\DataTables;
 
@@ -250,5 +251,37 @@ class ArticleController extends Controller
         }
 
         Storage::disk($disk)->put($path . $dimension . '_' . $original, $resize);
+    }
+
+    public function export() {
+
+        app('debugbar')->disable();
+
+        $csvExporter = new Export();
+        $article = Article::with('manufacturer', 'categorie')->get();
+        $fields = [
+            'name' => 'Name',
+            'categorie.name' => 'Kategorie',
+            'manufacturer.name' => 'Hersteller',
+            'tags' => 'Tags',
+            'price' => 'Preis',
+            'description' => 'Beschreibung',
+            'status' => 'Status',
+            'tarifCount' => 'Aktive Tarife'
+        ];
+
+        $csvExporter->beforeEach(function ($article) {
+            $article->tarifCount = $article->tarifs()->active()->wherePivot('status', '=', 1)->count();
+
+            $tags = '';
+            foreach ($article->tags()->get() as $tag) {
+                $tags .= $tag->name . ';';
+            }
+            $article->tags = $tags;
+        });
+
+        $csvExporter->build($article, $fields)->download('article_export.csv');
+
+
     }
 }

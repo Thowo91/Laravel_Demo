@@ -3,6 +3,7 @@
 @section('content')
 
     <h2>Artikelverwaltung</h2> <a href="{{ route('frontend.article.index') }}" target="_blank" class="btn btn-dark mb-2">Frontend</a>
+    <a href="{{ route('article.export') }}" class="btn btn-success mb-2">Export</a>
 
     <p><a href="{{ route('article.create') }}" class="btn btn-primary">Create</a></p>
 
