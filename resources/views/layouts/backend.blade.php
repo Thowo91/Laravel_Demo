@@ -177,6 +177,10 @@
             <li>
                 <a href="{{ route('tarif.index') }}" class="dropdown-item {{ (\Request::is('backend/tarif*')) ? 'font-weight-bold' : '' }}">Tarif</a>
             </li>
+            <hr>
+            <li>
+                <a href="{{ route('articleInformation') }}" target="_blank" class="dropdown-item">Article Information Mail</a>
+            </li>
         </ul>
         <ul class="list-unstyled">
             <hr>

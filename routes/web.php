@@ -78,6 +78,12 @@ Route::namespace('Backend')
         Route::get('/tarif/{tarif}/delete', 'TarifController@destroy')->name('tarif.delete');
         Route::resource('/tarif', 'TarifController');
         Route::get('/tarifIndexDatatables', 'TarifController@indexDatatables')->name('tarif.data');
+
+        Route::get('/mailable/articleInformation', function() {
+            $article = App\Article::find(2);
+
+            return new App\Mail\ArticleInformation($article);
+        })->name('articleInformation');
     }
 );
 
