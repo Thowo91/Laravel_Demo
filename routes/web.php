@@ -11,8 +11,6 @@
 |
 */
 
-use function foo\func;
-
 Auth::routes();
 
 Route::namespace('Frontend')
@@ -85,6 +83,8 @@ Route::namespace('Backend')
 
             return new App\Mail\ArticleInformation($article);
         })->name('articleInformation');
+
+        Route::get('/pdftest', 'PdfController@pdfTest')->name('pdftest');
     }
 );
 

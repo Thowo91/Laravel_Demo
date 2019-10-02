@@ -181,6 +181,9 @@
             <li>
                 <a href="{{ route('articleInformation') }}" target="_blank" class="dropdown-item">Article Information Mail</a>
             </li>
+            <li>
+                <a href="{{ route('pdftest') }}" target="_blank" class="dropdown-item">Pdf Test</a>
+            </li>
         </ul>
         <ul class="list-unstyled">
             <hr>
