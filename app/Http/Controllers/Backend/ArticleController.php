@@ -12,6 +12,7 @@ use App\Tarif;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Laracsv\Export;
+use Spatie\Activitylog\Models\Activity;
 use Storage;
 use Yajra\DataTables\DataTables;
 
@@ -131,7 +132,9 @@ class ArticleController extends Controller
             $selectedTarif[$tarif->pivot->tarif_id]['price'] = $tarif->pivot->price;
         }
 
-        return view('backend.article.edit', compact('article', 'status', 'manufacturer', 'categorie', 'tags', 'selected', 'tarife', 'selectedTarif'));
+        $activity = Activity::inLog('article')->forSubject($article)->orderBy('id', 'desc')->take(5)->get();
+
+        return view('backend.article.edit', compact('article', 'status', 'manufacturer', 'categorie', 'tags', 'selected', 'tarife', 'selectedTarif', 'activity'));
     }
 
     /**

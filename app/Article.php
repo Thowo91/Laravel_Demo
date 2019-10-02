@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Article
@@ -38,6 +39,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Article extends Model
 {
+    use LogsActivity;
+
+    protected static $logName = 'article';
+
+    protected static $logFillable = true;
+    protected static $logOnlyDirty = true;
+
     protected $fillable = ['categorie_id', 'manufacturer_id', 'name', 'price', 'description', 'status'];
 
     public function categorie() {
