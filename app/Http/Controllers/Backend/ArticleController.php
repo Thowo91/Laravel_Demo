@@ -147,6 +147,8 @@ class ArticleController extends Controller
     public function update(ArticleRequest $request, Article $article)
     {
 
+//        \activity()->on($article)->log('edited');
+
         $article->update($request->all());
         $article->tags()->sync($request->tags_id);
 

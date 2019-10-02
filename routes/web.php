@@ -85,6 +85,9 @@ Route::namespace('Backend')
         })->name('articleInformation');
 
         Route::get('/pdftest', 'PdfController@pdfTest')->name('pdftest');
+
+        Route::get('/changelog', 'ChangelogController@index')->name('changelog');
+        Route::get('/changelogDatatable', 'ChangelogController@indexDatatable')->name('changelog.data');
     }
 );
 

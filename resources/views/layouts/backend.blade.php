@@ -179,6 +179,9 @@
             </li>
             <hr>
             <li>
+                <a href="{{ route('changelog') }}" class="dropdown-item {{ (\Request::is('backend/changelog')) ? 'font-weight-bold' : '' }}">Changelog</a>
+            </li>
+            <li>
                 <a href="{{ route('articleInformation') }}" target="_blank" class="dropdown-item">Article Information Mail</a>
             </li>
             <li>

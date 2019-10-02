@@ -44,6 +44,7 @@ class Article extends Model
     protected static $logName = 'article';
 
     protected static $logFillable = true;
+
     protected static $logOnlyDirty = true;
 
     protected $fillable = ['categorie_id', 'manufacturer_id', 'name', 'price', 'description', 'status'];

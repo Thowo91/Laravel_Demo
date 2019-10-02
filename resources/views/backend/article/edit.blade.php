@@ -34,11 +34,9 @@
                     <td>{{ $entry->causer->name }}</td>
                     @foreach($entry->changes as $item)
                         <td>
-                            <ul>
-                                @foreach($item as $key => $value)
-                                    <li>{{ $key }}: {{ $value }}</li>
-                                @endforeach
-                            </ul>
+                            @foreach($item as $key => $value)
+                                <p>{{ $key }}: {{ $value }}</p>
+                            @endforeach
                         </td>
                     @endforeach
                     <td>{{ $entry->created_at }}</td>
