@@ -65,4 +65,23 @@
 
     </div>
 
+    @if(!empty($lastSeenArticle))
+        <h2>Last Seen</h2>
+        <div class="row">
+            @foreach($lastSeenArticle as $item)
+                <div class="col-2">
+                    <div class="card">
+                        <h5 class="card-header">{{ $item->id }} | {{ $item->name }}</h5>
+                        <div class="card-body">
+                            <div class="card-text">
+                                <p>Kategorie: {{ $item->categorie->name }}</p>
+                                <p>Hersteller: {{ $item->manufacturer->name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @endif
+
 @endsection

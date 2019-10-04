@@ -75,7 +75,9 @@ class ArticleController extends Controller
     {
         $tarifs = $article->tarifs()->active()->wherePivot('status', '=', 1)->get();
 
-        return view('frontend.article.show', compact('article', 'tarifs'));
+        $lastSeenArticle = $this->lastSeenArticle($article);
+
+        return view('frontend.article.show', compact('article', 'tarifs', 'lastSeenArticle'));
     }
 
     /**
@@ -94,5 +96,42 @@ class ArticleController extends Controller
         Mail::to($request->email)->send(new ArticleInformation($article));
 
         return redirect()->route('frontend.article.show', $article->id);
+    }
+
+    public function lastSeenArticle(Article $article) {
+
+        $lastSeenArticle = [];
+
+        if (session()->has('lastSeen')) {
+
+            $session = session('lastSeen');
+            $show = $session;
+
+            if(!in_array($article->id, $session)) {
+                if (count($session) == 6 ) {
+                    array_shift($session);
+                    session(['lastSeen' => $session]);
+                }
+                session()->push('lastSeen', $article->id);
+            } else {
+                $key = array_search($article->id,$show);
+                unset($show[$key], $session[$key]);
+                $session[] = $article->id;
+                session(['lastSeen' => $session]);
+            }
+            // order for view
+            $in = implode(', ', $show);
+
+            if (!empty($show)) {
+                $lastSeenArticle = Article::with('categorie', 'manufacturer')->whereIn('id', $show)
+                    ->orderByRaw(\DB::raw("FIELD(id, $in)"))
+                    ->get();
+            }
+
+        } else {
+            session()->push('lastSeen', $article->id);
+        }
+
+        return $lastSeenArticle;
     }
 }
