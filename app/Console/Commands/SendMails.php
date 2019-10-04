@@ -14,14 +14,14 @@ class SendMails extends Command
      *
      * @var string
      */
-    protected $signature = 'email:send {article : The ID of the article}';
+    protected $signature = 'email:send {article? : The ID of the article}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Send Article Information Mail with all active Articles';
+    protected $description = 'Send Article Information Mail for named id or with all active Articles';
 
     /**
      * Create a new command instance.
@@ -40,10 +40,25 @@ class SendMails extends Command
      */
     public function handle()
     {
-        $article = Article::find($this->argument('article'))->with('categorie', 'manufacturer')->active()->first();
+        if ($this->argument('article')) {
+            $article = Article::find($this->argument('article'))->with('categorie', 'manufacturer')->first();
+            Mail::to('activeArticle@test.com')->send(new ArticleInformation($article));
+            $this->info('Send One Mail to activeArticle@test.com');
 
-        Mail::to('activeArticle@test.com')->send(new ArticleInformation($article));
 
-        $this->info('Send Mail to activeArticle@test.com');
+        } else {
+
+            $articles = Article::with('categorie', 'manufacturer')->active()->get();
+
+            foreach ($articles as $article) {
+                dispatch(function () use ($article) {
+                    Mail::to('activeArticle@test.com')->send(new ArticleInformation($article));
+                    sleep(5);
+                });
+            }
+            $this->info('Send' . count($articles) . 'Mails to activeArticle@test.com');
+
+        }
+
     }
 }
