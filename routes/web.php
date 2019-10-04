@@ -47,9 +47,8 @@ Route::namespace('Backend')
     ->middleware('auth')
     ->group( function() {
 
-        Route::get('/', function () {
-            return view('admin');
-        })->name('backend');
+        Route::get('/', 'DashboardController@index')->name('backend');
+        Route::get('/dashboardData', 'DashboardController@data')->name('dashboard.data');
 
         Route::get('/manufacturer/{manufacturer}/delete', 'ManufacturerController@destroy')->name('manufacturer.delete');
         Route::resource('manufacturer', 'ManufacturerController');
