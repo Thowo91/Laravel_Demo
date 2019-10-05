@@ -2,13 +2,9 @@ var ctx = document.getElementById('myChart');
 
 var url = "backend/dashboardData";
 
-var data;;
-
 $.get(url, function(response) {
     data = response;
-});
 
-console.log(data);
 
 var myChart = new Chart(ctx, {
     type: 'bar',
@@ -45,4 +41,5 @@ var myChart = new Chart(ctx, {
             }]
         }
     }
+});
 });

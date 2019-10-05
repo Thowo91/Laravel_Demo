@@ -14,7 +14,7 @@ class DashboardController extends Controller
 
     public function data() {
 
-        $data = [5, 5, 5, 5, 5, 5];
+        $data = [15, 4, 10, 8, 2, 5];
 
         return $data;
     }
