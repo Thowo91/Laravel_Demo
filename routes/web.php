@@ -48,7 +48,6 @@ Route::namespace('Backend')
     ->group( function() {
 
         Route::get('/', 'DashboardController@index')->name('backend');
-        Route::get('/dashboardData', 'DashboardController@data')->name('dashboard.data');
 
         Route::get('/manufacturer/{manufacturer}/delete', 'ManufacturerController@destroy')->name('manufacturer.delete');
         Route::resource('manufacturer', 'ManufacturerController');

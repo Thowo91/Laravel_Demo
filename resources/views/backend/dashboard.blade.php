@@ -4,13 +4,10 @@
 
     <div class="row">
         <div class="col-6">
-            <canvas id="myChart" width="200" height="100">
-                <p>Fallback</p>
-            </canvas>
+            {!! $testChart->container() !!}
         </div>
     </div>
 
-    <script src="{{ asset('js/all.js') }}"></script>
-
+    {!! $testChart->script() !!}
 
 @endsection
