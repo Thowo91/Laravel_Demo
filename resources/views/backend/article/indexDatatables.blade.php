@@ -43,6 +43,13 @@
                    { data: 'actions', name: 'actions'},
                ]
            }) ;
+
+           $(document).on("change", 'input[type=checkbox]', function() {
+              var $this = $(this);
+              console.log($this.attr('data-id'), $this.is(':checked'));
+
+           });
+
         });
     </script>
 

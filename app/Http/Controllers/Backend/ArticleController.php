@@ -34,7 +34,9 @@ class ArticleController extends Controller
         $article = Article::with(['manufacturer', 'categorie', 'tags',])->select('articles.*');
 
         return DataTables::of($article)
-            ->editColumn('status', '{!! $model->statusBadge !!}')
+            ->editColumn('status', function($article) {
+                return \Form::checkbox('status', 1, $article->status == 1, ['data-id' => $article->id]);
+            })
             ->addColumn('actions', function($article) {
                 $html = '<a href="' . route('article.edit', $article->id) . '" class="btn-sm btn-primary">Edit</a>';
                 return $html .= '<a href="' . route('article.delete', $article->id) . '" class="btn-sm btn-danger">Delete</a>';
@@ -55,6 +57,12 @@ class ArticleController extends Controller
                 'actions',
             ])
             ->make(true);
+    }
+
+    public function updateStatus(Article $article) {
+
+        \activity()->on($article)->log('ajax checkbox');
+
     }
 
     /**
@@ -282,7 +290,6 @@ class ArticleController extends Controller
         });
 
         $csvExporter->build($article, $fields)->download('article_export.csv');
-
 
     }
 }
