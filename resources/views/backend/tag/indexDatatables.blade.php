@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h2>Hersteller</h2>
+    <h2>Tags</h2>
 
     <p><a href="{{ route('tag.create') }}" class="btn btn-primary">Create</a></p>
 
