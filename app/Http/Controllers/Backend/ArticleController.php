@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Article;
 use App\Categorie;
+use App\Helpers\ToastrHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use App\Manufacturer;
@@ -65,6 +66,8 @@ class ArticleController extends Controller
         $article = Article::find(Input::get('id'));
         $article->status = (Input::get('status') == 'true' ? 1 : 0);
         $article->save();
+
+        echo json_encode([['status' => 'success']]);
 
     }
 
@@ -164,6 +167,8 @@ class ArticleController extends Controller
         $article->tags()->sync($request->tags_id);
 
         $this->imageUpload($request, $article);
+
+        ToastrHelper::flashSession('success', 'Update Article Id: ' . $article->id, 'Update');
 
         return redirect()->route('article.index');
     }

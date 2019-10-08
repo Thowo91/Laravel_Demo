@@ -55,7 +55,10 @@
                   },
                   url: '{!! route('article.changeStatus') !!}',
                   type: 'POST',
-                  dataType: 'json'
+                  dataType: 'json',
+                  success: function() {
+                      toastr.success('Set ' + ($this.is(':checked') ? 'active' : 'inactive') , 'Article ' + $this.attr('data-id'))
+                  }
               });
 
            });
