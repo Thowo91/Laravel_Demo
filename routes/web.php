@@ -87,6 +87,10 @@ Route::namespace('Backend')
 
         Route::get('/changelog', 'ChangelogController@index')->name('changelog');
         Route::get('/changelogDatatable', 'ChangelogController@indexDatatable')->name('changelog.data');
+
+        Route::get('/exampleForm', function() {
+            return view('backend.exampleForm');
+        })->name('exampleForm');
     }
 );
 

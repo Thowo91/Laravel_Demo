@@ -194,6 +194,9 @@
             <li>
                 <a href="{{ route('pdftest') }}" target="_blank" class="dropdown-item">Pdf Test</a>
             </li>
+            <li>
+                <a href="{{ route('exampleForm') }}" class="dropdown-item {{ (Request::is('backend/exampleForm')) ? 'font-weight-bold' : '' }}">Example Form</a>
+            </li>
         </ul>
         <ul class="list-unstyled">
             <hr>
