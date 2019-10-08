@@ -63,6 +63,7 @@ Route::namespace('Backend')
         Route::get('/article/export', 'ArticleController@export')->name('article.export');
         Route::resource('article', 'ArticleController');
         Route::get('/articleIndexDatatables', 'ArticleController@indexDatatables')->name('article.data');
+        Route::post('/changeStatus', 'ArticleController@updateStatus')->name('article.changeStatus');
 
         Route::get('/tag/{tag}/delete', 'TagController@destroy')->name('tag.delete');
         Route::resource('tag', 'TagController');

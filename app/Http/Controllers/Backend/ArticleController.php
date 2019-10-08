@@ -10,6 +10,7 @@ use App\Manufacturer;
 use App\Tag;
 use App\Tarif;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Intervention\Image\Facades\Image;
 use Laracsv\Export;
 use Spatie\Activitylog\Models\Activity;
@@ -59,9 +60,11 @@ class ArticleController extends Controller
             ->make(true);
     }
 
-    public function updateStatus(Article $article) {
+    public function updateStatus() {
 
-        \activity()->on($article)->log('ajax checkbox');
+        $article = Article::find(Input::get('id'));
+        $article->status = (Input::get('status') == 'true' ? 1 : 0);
+        $article->save();
 
     }
 

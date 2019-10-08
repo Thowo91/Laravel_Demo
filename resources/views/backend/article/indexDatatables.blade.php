@@ -46,7 +46,17 @@
 
            $(document).on("change", 'input[type=checkbox]', function() {
               var $this = $(this);
-              console.log($this.attr('data-id'), $this.is(':checked'));
+
+              $.ajax({
+                  data: {
+                      id: $this.attr('data-id'),
+                      status: $this.is(':checked'),
+                      _token: '{!! csrf_token() !!}'
+                  },
+                  url: '{!! route('article.changeStatus') !!}',
+                  type: 'POST',
+                  dataType: 'json'
+              });
 
            });
 
