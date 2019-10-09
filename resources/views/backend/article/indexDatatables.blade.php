@@ -57,7 +57,11 @@
                   type: 'POST',
                   dataType: 'json',
                   success: function() {
-                      toastr.success('Set ' + ($this.is(':checked') ? 'active' : 'inactive') , 'Article ' + $this.attr('data-id'))
+                      if($this.is(':checked')) {
+                          toastr.success('Set active', 'Article ' + $this.attr('data-id'))
+                      } else {
+                          toastr.warning('Set inactive', 'Article ' + $this.attr('data-id'))
+                      }
                   }
               });
 
