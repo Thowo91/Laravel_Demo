@@ -36,22 +36,11 @@
         </div>
         <div class="col-md-7 col-lg-9">
             <div class="row">
+
+
                 @foreach($articles as $article)
-                    <div class="col-lg-6 col-xl-4">
-                        <div class="card mb-2">
-                            <h5 class="card-header"><a href="{{ route('frontend.article.show', $article->id) }}">{{ $article->id }} | {{ $article->name }}</a></h5>
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $article->name }}</h5>
-                                <div class="card-text">
-                                    <p>Kategorie: {{ $article->categorie->name }}</p>
-                                    <p>Hersteller: {{ $article->manufacturer->name }}</p>
-                                    @foreach($article->tags as $tag)
-                                        {!! $tag->tagBadge !!}
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <article-card :article="{{ $article }}" :url="'{{ route('frontend.article.show', $article->id) }}'"></article-card>
+
                 @endforeach
             </div>
             {{ $articles->links() }}
