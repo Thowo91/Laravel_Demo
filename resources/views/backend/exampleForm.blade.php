@@ -8,23 +8,23 @@
 
             <div class="form-group">
                 {{ Form::label('name', 'Name') }}
-                {{ Form::text('name', null, ['class' => 'form-control']) }}
+                {{ Form::text('name', null, ['Placeholder' => 'Name', 'class' => 'form-control', 'required', 'minlength' => 3, 'maxlength' => 50]) }}
             </div>
             <div class="form-group">
                 {{ Form::label('email', 'Email') }}
-                {{ Form::email('email', null, ['class' => 'form-control']) }}
+                {{ Form::email('email', null, ['Placeholder' => 'Email', 'class' => 'form-control', 'required']) }}
             </div>
             <div class="form-group">
                 {{ Form::label('password', 'Passwort') }}
-                {{ Form::password('password', ['class' => 'form-control']) }}
+                {{ Form::password('password', ['Placeholder' => 'Passwort', 'class' => 'form-control', 'required', 'minlength' => 5]) }}
             </div>
             <div class="form-group">
                 {{ Form::label('confirmPassword', 'Passwort wiederholen') }}
-                {{ Form::password('confirmPassword', ['class' => 'form-control']) }}
+                {{ Form::password('confirmPassword', ['Placeholder' => 'Passwort', 'class' => 'form-control', 'required', 'minlength' => 5]) }}
             </div>
             <div class="form-group">
                 {{ Form::label('url', 'Url') }}
-                {{ Form::text('url', null, ['class' => 'form-control']) }}
+                {{ Form::text('url', null, ['Placeholder' => 'Url', 'class' => 'form-control']) }}
             </div>
 
             {{ Form::submit('Go!', ['class' => 'btn btn-primary']) }}
@@ -32,43 +32,26 @@
         </div>
     </div>
 
-    <style>
-        .error {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
-
     <script>
         $(document).ready(function() {
             $("#exampleForm").validate({
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid').addClass('is-valid');
+                },
                 rules: {
-                    name: {
-                        required: true,
-                        minlength: 3,
-                        maxlength: 50
-                    },
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    password: {
-                        required: true,
-                        minlength: 5
-                    },
                     confirmPassword: {
-                        required: true,
-                        minlength: 5,
                         equalTo: '#password'
                     },
                     url: {
                         url: true
-                    }
-                },
-                messages: {
-                    name: {
-                        required: "Please enter name",
-                        minlength: "At Least 3 Characters"
                     }
                 }
             });
