@@ -17,9 +17,11 @@
         </div>
     </div>
 
-    {!! $articleCreationChart->script() !!}
-    {!! $articleCategorieChart->script() !!}
-    {!! $tagsPerItemChart->script() !!}
-    {!! $testChart->script() !!}
+    @push('scripts')
+        {!! $articleCreationChart->script() !!}
+        {!! $articleCategorieChart->script() !!}
+        {!! $tagsPerItemChart->script() !!}
+        {!! $testChart->script() !!}
+    @endpush
 
 @endsection

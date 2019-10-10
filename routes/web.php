@@ -91,6 +91,10 @@ Route::namespace('Backend')
         Route::get('/exampleForm', function() {
             return view('backend.exampleForm');
         })->name('exampleForm');
+
+        Route::get('/exampleVue', function () {
+            return view('backend.exampleVue');
+        })->name('exampleVue');
     }
 );
 

@@ -9,9 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/backend.js') }}"></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -147,94 +144,102 @@
 
 </head>
 <body>
+    <div id="app">
+        <div class="wrapper">
+            <!-- Sidebar  -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3><a href="{{ route('backend') }}" style="color: #fff;">Laravel Backend</a></h3>
+                </div>
 
-<div class="wrapper">
-    <!-- Sidebar  -->
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <h3><a href="{{ route('backend') }}" style="color: #fff;">Laravel Backend</a></h3>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="{{ route('manufacturer.index') }}" class="dropdown-item {{ Request::is('backend/manufacturer*') ? 'font-weight-bold' : '' }}">Hersteller</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('categorie.index') }}" class="dropdown-item {{ Request::is('backend/categorie*') ? 'font-weight-bold' : '' }}">Kategorie</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('article.index') }}" class="dropdown-item {{ Request::is('backend/article*') ? 'font-weight-bold' : '' }}">Artikel</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('tag.index') }}" class="dropdown-item {{ Request::is('backend/tag*') ? 'font-weight-bold' : '' }}">Tag</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <a href="{{ route('provider.index') }}" class="dropdown-item {{ Request::is('backend/provider*') ? 'font-weight-bold' : '' }}">Provider</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('tarif.index') }}" class="dropdown-item {{ Request::is('backend/tarif*') ? 'font-weight-bold' : '' }}">Tarif</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <a href="{{ route('changelog') }}" class="dropdown-item {{ Request::is('backend/changelog') ? 'font-weight-bold' : '' }}">Changelog</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('articleInformation') }}" target="_blank" class="dropdown-item">Article Information Mail</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('pdftest') }}" target="_blank" class="dropdown-item">Pdf Test</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('exampleForm') }}" class="dropdown-item {{ Request::is('backend/exampleForm') ? 'font-weight-bold' : '' }}">Example Form</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('exampleVue') }}" class="dropdown-item {{ Request::is('backend/exampleVue') ? 'font-weight-bold' : '' }}">Example Vue</a>
+                    </li>
+                </ul>
+                <ul class="list-unstyled">
+                    <hr>
+                    <li>
+                        <a href="{{ route('frontend.frontend') }}" target="_blank" class="dropdown-item">Frontend</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Page Content  -->
+            <div id="content">
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+
+                        <button type="button" id="sidebarCollapse" class="btn btn-info ml-auto" style="color: #fff;">
+                            <i class="fas fa-align-left"></i>
+                        </button>
+                        <a class="btn btn-dark ml-2" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </nav>
+
+                    <div class="container">
+                        @yield('content')
+                    </div>
+
+            </div>
         </div>
 
-        <ul class="list-unstyled">
-            <li>
-                <a href="{{ route('manufacturer.index') }}" class="dropdown-item {{ (\Request::is('backend/manufacturer*')) ? 'font-weight-bold' : '' }}">Hersteller</a>
-            </li>
-            <li>
-                <a href="{{ route('categorie.index') }}" class="dropdown-item {{ (\Request::is('backend/categorie*')) ? 'font-weight-bold' : '' }}">Kategorie</a>
-            </li>
-            <li>
-                <a href="{{ route('article.index') }}" class="dropdown-item {{ (\Request::is('backend/article*')) ? 'font-weight-bold' : '' }}">Artikel</a>
-            </li>
-            <li>
-                <a href="{{ route('tag.index') }}" class="dropdown-item {{ (\Request::is('backend/tag*')) ? 'font-weight-bold' : '' }}">Tag</a>
-            </li>
-            <hr>
-            <li>
-                <a href="{{ route('provider.index') }}" class="dropdown-item {{ (\Request::is('backend/provider*')) ? 'font-weight-bold' : '' }}">Provider</a>
-            </li>
-            <li>
-                <a href="{{ route('tarif.index') }}" class="dropdown-item {{ (\Request::is('backend/tarif*')) ? 'font-weight-bold' : '' }}">Tarif</a>
-            </li>
-            <hr>
-            <li>
-                <a href="{{ route('changelog') }}" class="dropdown-item {{ (\Request::is('backend/changelog')) ? 'font-weight-bold' : '' }}">Changelog</a>
-            </li>
-            <li>
-                <a href="{{ route('articleInformation') }}" target="_blank" class="dropdown-item">Article Information Mail</a>
-            </li>
-            <li>
-                <a href="{{ route('pdftest') }}" target="_blank" class="dropdown-item">Pdf Test</a>
-            </li>
-            <li>
-                <a href="{{ route('exampleForm') }}" class="dropdown-item {{ (Request::is('backend/exampleForm')) ? 'font-weight-bold' : '' }}">Example Form</a>
-            </li>
-        </ul>
-        <ul class="list-unstyled">
-            <hr>
-            <li>
-                <a href="{{ route('frontend.frontend') }}" target="_blank" class="dropdown-item">Frontend</a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- Page Content  -->
-    <div id="content">
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-
-                <button type="button" id="sidebarCollapse" class="btn btn-info ml-auto" style="color: #fff;">
-                    <i class="fas fa-align-left"></i>
-                </button>
-                <a class="btn btn-dark ml-2" href="{{ route('logout') }}"
-                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            </div>
-        </nav>
-
-            <div class="container">
-                @yield('content')
-            </div>
-
+        @push('scripts')
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#sidebarCollapse').on('click', function () {
+                        $('#sidebar, #content').toggleClass('active');
+                        $('.collapse.in').toggleClass('in');
+                        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                    });
+                });
+            </script>
+        @endpush
     </div>
-</div>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar, #content').toggleClass('active');
-            $('.collapse.in').toggleClass('in');
-            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-        });
-    });
-</script>
 </body>
 
+
+<script src="{{ asset('js/backend.js') }}"></script>
 @include('backend.elements.toastr')
 @stack('scripts')
 
