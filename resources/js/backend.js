@@ -22,8 +22,8 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('example-input-list', require('./components/backend/ExcampleInputList').default);
 Vue.component('example-computed-properties', require('./components/backend/ExcampleComputedProperties').default);
-// Vue.component('example-event', require('./components/backend/ExcampleEvent').default);
-// Vue.component('example-listener', require('./components/backend/ExcampleListener').default);
+Vue.component('example-event', require('./components/backend/ExcampleEvent').default);
+Vue.component('example-listener', require('./components/backend/ExcampleListener').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
