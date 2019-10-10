@@ -1931,6 +1931,12 @@ __webpack_require__.r(__webpack_exports__);
       item: '',
       items: []
     };
+  },
+  methods: {
+    pushItem: function pushItem(item) {
+      this.items.push(item);
+      this.item = '';
+    }
   }
 });
 
@@ -87331,7 +87337,7 @@ var render = function() {
       {
         on: {
           click: function($event) {
-            return _vm.items.push(_vm.item)
+            return _vm.pushItem(_vm.item)
           }
         }
       },
@@ -99523,12 +99529,16 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('example-input-list', __webpack_require__(/*! ./components/backend/ExcampleInputList */ "./resources/js/components/backend/ExcampleInputList.vue")["default"]);
-Vue.component('example-computed-properties', __webpack_require__(/*! ./components/backend/ExcampleComputedProperties */ "./resources/js/components/backend/ExcampleComputedProperties.vue")["default"]);
+Vue.component('example-computed-properties', __webpack_require__(/*! ./components/backend/ExcampleComputedProperties */ "./resources/js/components/backend/ExcampleComputedProperties.vue")["default"]); // Vue.component('example-event', require('./components/backend/ExcampleEvent').default);
+// Vue.component('example-listener', require('./components/backend/ExcampleListener').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+Vue.prototype.$eventBus = new Vue(); // Global event bus
 
 var app = new Vue({
   el: '#app'

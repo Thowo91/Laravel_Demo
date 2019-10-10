@@ -6,7 +6,7 @@
         </ul>
 
         <input type="text" v-model="item">
-        <button @click="items.push(item)" >Add Item</button>
+        <button @click="pushItem(item)" >Add Item</button>
     </div>
 </template>
 
@@ -17,6 +17,12 @@
             return {
                 item: '',
                 items: []
+            }
+        },
+        methods: {
+            pushItem: function(item) {
+                this.items.push(item);
+                this.item = '';
             }
         }
     }
