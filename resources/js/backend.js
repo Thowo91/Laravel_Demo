@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('example-input-list', require('./components/backend/ExcampleInputList').default);
+Vue.component('example-computed-properties', require('./components/backend/ExcampleComputedProperties').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
