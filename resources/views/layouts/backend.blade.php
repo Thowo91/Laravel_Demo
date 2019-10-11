@@ -239,7 +239,7 @@
 </body>
 
 
-<script src="{{ asset('js/backend.js') }}"></script>
+<script src="{{ asset('js/backend.js') }}?{{time()}}"></script>
 @include('backend.elements.toastr')
 @stack('scripts')
 
