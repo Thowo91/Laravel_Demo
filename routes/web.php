@@ -38,6 +38,8 @@ Route::namespace('Frontend')
         Route::get('tag', 'TagController@index')->name('tag.index');
 
         Route::get('tagable/{tag}', 'TagableController@index')->name('tagable.index');
+
+        Route::post('/changeLanguage', "LanguageController@changeLanguage");
     });
 
 
