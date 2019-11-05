@@ -11,7 +11,6 @@ class ChangeLanguage
     public function handle($request, Closure $next)
     {
         $language = Session::get('language');
-        dump($language);
         App::setLocale($language);
         return $next($request);
     }

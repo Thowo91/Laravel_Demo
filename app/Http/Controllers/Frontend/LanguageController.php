@@ -14,9 +14,6 @@ class LanguageController extends Controller
 
         $language = Input::get('lang');
         Session::put('language',$language);
-        Session::save();
-
-        dump($language = Session::get('language'));
 
         return redirect()->back();
     }
