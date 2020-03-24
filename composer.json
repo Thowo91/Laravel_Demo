@@ -17,6 +17,7 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.8.0",
         "spatie/laravel-activitylog": "^3.8",
+        "spatie/laravel-translation-loader": "^2.6",
         "usmanhalalit/laracsv": "^2.0",
         "yajra/laravel-datatables": "^1.5"
     },
