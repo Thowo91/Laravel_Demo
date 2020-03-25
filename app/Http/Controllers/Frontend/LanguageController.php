@@ -23,9 +23,10 @@ class LanguageController extends Controller
 //            ->where('key', 'greeting')
 //            ->first();
 //        dd($line);
-//
-//        $line->setTranslation('en', 'test');
-//        $line->setTranslation('de', 'halali');
+
+//        $line->setTranslation('en', 'Hello');
+//        $line->setTranslation('de', 'Servus');
+//        $line->setTranslation('fr', 'Bonjour');
 //        $line->save();
 
 

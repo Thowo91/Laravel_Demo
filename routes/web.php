@@ -15,11 +15,14 @@ Auth::routes();
 
 Route::namespace('Frontend')
     ->name('frontend.')
+    ->prefix('{locale}')
+    ->where(['locale' => '[a-zA-Z]{2}'])
+    ->middleware('setlocale')
     ->group( function() {
 
         Route::get('/', function() {
             return view('start');
-        })->name('frontend');
+        })->name('start');
 
         Route::get('/home', 'HomeController@index')->name('home');
 
