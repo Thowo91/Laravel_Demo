@@ -10,7 +10,7 @@ class ChangeLanguage
 {
     public function handle($request, Closure $next)
     {
-        $language = Session::get('language');
+        $language = Session::get('language', config('app.locale'));
         App::setLocale($language);
         return $next($request);
     }
